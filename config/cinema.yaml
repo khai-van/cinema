@@ -1,0 +1,9 @@
+service:
+  port: 8080
+
+  min_distance: 6
+
+postgres:
+  connection_string: postgres://user:password@localhost:5432/cinema_service?sslmode=disable
+  max_idle_connections: 5
+  max_open_connections: 20

@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package cinema;
+
+option go_package = "./cinema";
+
+service CinemaService {
+  rpc ConfigureCinema(CinemaConfig) returns (StatusResponse);
+  rpc QueryReservedSeats(QueryReservedSeatsRequest) returns (QueryReservedSeatsResponse);
+  rpc ReserveSeats(SeatReservationRequest) returns (StatusResponse);
+  rpc CancelSeats(SeatCancellationRequest) returns (StatusResponse);
+}
+
+message CinemaConfig {
+  string name = 1;
+  int32 rows = 2;
+  int32 columns = 3;
+}
+
+message QueryReservedSeatsRequest {
+  int32 cinema_id = 1;
+}
+
+message QueryReservedSeatsResponse {
+  repeated Seat seats = 1;
+  int32 max_rows = 2;
+  int32 max_columns = 3;
+  int32 min_distance = 4;
+}
+
+
+message Seat {
+  int32 row = 1;
+  int32 column = 2;
+}
+
+message SeatReservationRequest {
+  int32 cinema_id = 1;
+  repeated Seat seats = 2;
+}
+
+message SeatCancellationRequest {
+  int32 cinema_id = 1;
+  repeated Seat seats = 2;
+}
+
+message StatusResponse {
+  Status status = 1;
+  string message = 2;
+}
+
+enum Status {
+  SUCCESS = 0;  
+  FAILURE = 1;  
+}
