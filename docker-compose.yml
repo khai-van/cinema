@@ -11,17 +11,17 @@ services:
     ports:
       - "5432:5432"
 
-  # cinema-service:
-  #   build:
-  #     context: .
-  #     dockerfile: ./cmd/Dockerfile
-  #   container_name: cinema-service
-  #   environment:
-  #     POSTGRES_CONNECTION_STRING: postgres://user:password@postgres:5432/cinema_service?sslmode=disable
-  #   depends_on:
-  #     - postgres
-  #   ports:
-  #     - "50051:50051"
+  cinema-service:
+    build:
+      context: .
+      dockerfile: ./cmd/Dockerfile
+    container_name: cinema-service
+    environment:
+      POSTGRES_CONNECTION_STRING: postgres://user:password@postgres:5432/cinema_service?sslmode=disable
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
 
 volumes:
   postgres-data:
